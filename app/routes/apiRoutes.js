@@ -16,6 +16,8 @@ module.exports = function (app) {
         console.log(req.body);
 
         var userData = req.body;
+        var userName = userData.name;
+        var userPhoto = userData.photo;
         var userScores = userData.scores;
         var totalDifferece = 0;
 
@@ -25,9 +27,9 @@ module.exports = function (app) {
             for (var k = 0; k < friendsList[i].scores[k]; k++) {
                 totalDifference += Math.abs(parseInt(userScores[k]) - parseInt(friendsList[i].scores[k]));
 
-                if (totalDifference == bestMatch.friendsDifference) {
+                if (totalDifference <= bestMatch.friendDifference) {
                     bestMatch.name = friendsList[i].name;
-                    bestMatch.photo = friends[i].photo;
+                    bestMatch.photo = friendsList[i].photo;
                     bestMatch.friendDifferece = totalDifference;
                 }
             }
